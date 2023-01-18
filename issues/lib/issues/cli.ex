@@ -6,7 +6,6 @@ defmodule Issues.CLI do
   the various functions that end up generating a
   table of the last _n_ issues in a GitHub project.
   """
-  @spec run([binary]) :: :help | {binary, binary, integer}
   def run(argv) do
     argv
     |> parse_args
@@ -51,11 +50,11 @@ defmodule Issues.CLI do
     System.halt(0)
   end
 
-  def process({user, project, _count}) do
+  def process({user, project, count}) do
     Issues.GithubIssues.fetch(user, project)
     |> decode_response()
     |> sort_into_descending_order()
-    |> last(_count)
+    |> last(count)
   end
 
   defp decode_response({:ok, body}) do

@@ -13,7 +13,6 @@ defmodule Issues.GithubIssues do
   end
 
   def handle_response({:ok, %{status_code: 200, body: body}}) do
-    IO.puts("Handle Response: #{body}")
     {:ok, Poison.encode!(body)}
   end
 
