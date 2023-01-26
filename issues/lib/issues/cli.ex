@@ -12,9 +12,13 @@ defmodule Issues.CLI do
   end
 
   def run(argv) do
-    argv
-    |> parse_args
-    |> process
+    list =
+      argv
+      |> parse_args
+      |> process
+      |> IO.inspect()
+
+    IO.puts("Success. Returned #{length(list)} issues.")
   end
 
   @doc """
@@ -72,14 +76,11 @@ defmodule Issues.CLI do
   end
 
   def sort_into_descending_order(list_of_issues) do
-    IO.puts("sort")
-    IO.inspect(list_of_issues)
-
     list_of_issues
     |> Enum.sort(fn i1, i2 -> i1["created_at"] >= i2["created_at"] end)
   end
 
-  defp last(list, count) do
+  def last(list, count) do
     list
     |> Enum.take(count)
     |> Enum.reverse()
