@@ -6,7 +6,20 @@ defmodule Noaa.CLI do
 
   @default_airport_code "KAFN"
 
-  #  import Issues.TableFormatter, only: [print_table: 2]
+  @display_keys [
+    "credit",
+    "location",
+    "station_id",
+    "latitude",
+    "longitude",
+    "observation_time_rfc822",
+    "temperature_string",
+    "relative_humidity",
+    "wind_string",
+    "pressure_string",
+    "dewpoint_string",
+    "visibility_mi"
+  ]
 
   def main(argv) do
     run(argv)
@@ -17,6 +30,7 @@ defmodule Noaa.CLI do
     argv
     |> parse_args
     |> process
+    |> display
   end
 
   @doc """
@@ -72,5 +86,18 @@ defmodule Noaa.CLI do
   defp decode_response({:error, error}) do
     IO.puts("Error fetching weather: #{error["message"]}")
     System.halt(2)
+  end
+
+  @doc """
+  Display observation data.
+
+  Don't understand where the "#content" key comes from.
+  """
+  def display(map) do
+    content = map["current_observation"]["#content"]
+
+    for key <- @display_keys do
+      IO.puts("#{key}: #{content[key]}")
+    end
   end
 end

@@ -13,13 +13,10 @@ defmodule Noaa.Airport do
 
   def airport_url(airport) do
     url = "#{@base_url}/#{airport}.xml"
-    Logger.info("Fetching: #{url}")
-    url
   end
 
   def handle_response({:ok, %{status_code: 200, body: body}}) do
-    bobby = {:ok, XmlToMap.naive_map(body)}
-    dbg()
+    {:ok, XmlToMap.naive_map(body)}
   end
 
   def handle_response({:ok, %{status_code: _, body: body}}) do

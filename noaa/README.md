@@ -1,8 +1,12 @@
 # Noaa
 
-**TODO: Add description**
+Exercise OrganizingAProject-5 from Programming Elixir by Dave Thomas.
 
 ## Installation
+Clone the GitHub repository:
+```
+https://github.com/rgacote/ProgrammingElixirExercises.git
+```
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 by adding `noaa` to your list of dependencies in `mix.exs`:
