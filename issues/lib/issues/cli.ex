@@ -1,24 +1,23 @@
 defmodule Issues.CLI do
-  @default_count 4
-
   @moduledoc """
   Handle the command line parsing and the dispatch to
   the various functions that end up generating a
   table of the last _n_ issues in a GitHub project.
   """
+
+  @default_count 4
+
+  import Issues.TableFormatter, only: [print_table: 2]
+
   def main(argv) do
     IO.puts("Hello World")
     run(argv)
   end
 
   def run(argv) do
-    list =
-      argv
-      |> parse_args
-      |> process
-      |> IO.inspect()
-
-    IO.puts("Success. Returned #{length(list)} issues.")
+    argv
+    |> parse_args
+    |> process
   end
 
   @doc """
@@ -64,6 +63,7 @@ defmodule Issues.CLI do
     |> decode_response()
     |> sort_into_descending_order()
     |> last(count)
+    |> print_table(["number", "created_at", "title"])
   end
 
   defp decode_response({:ok, body}) do
