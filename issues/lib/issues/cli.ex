@@ -10,7 +10,6 @@ defmodule Issues.CLI do
   import Issues.TableFormatter, only: [print_table: 2]
 
   def main(argv) do
-    IO.puts("Hello World")
     run(argv)
   end
 
