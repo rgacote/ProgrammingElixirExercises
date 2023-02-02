@@ -45,7 +45,7 @@ defmodule TableFormatterTest do
       assert List.last(columns) == ["title 3", "nice title"]
     end
 
-    test "print one column", fixture do
+    test "print one column" do
       column = TF.size_col("hello", 10)
       assert String.length(column) == 10
     end
