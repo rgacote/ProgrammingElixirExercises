@@ -35,8 +35,8 @@ defmodule Issues.TableFormatter do
     # Tuple of header/width.
     column_widths = Enum.zip(headers, column_widths)
 
-    print_header(column_widths)
-    print_separator(column_widths)
+    IO.puts(table_header(column_widths))
+    IO.puts(table_separator(column_widths))
 
     printables
     |> print_tickets(column_widths)
@@ -105,25 +105,36 @@ defmodule Issues.TableFormatter do
 
   column_widths contains tuples of header name and width.
   Header 'number' should be changed to '#'.
+
+  ## Example
+    iex> column_widths = [{"number", 3}, {"created_at", 12}, {"title", 15} ]
+    iex> Issues.TableFormatter.table_header(column_widths)
+    "#   | created_at   | title          "
   """
-  def print_header(column_widths) do
+  def table_header(column_widths) do
     cols =
       for {header, width} <- column_widths do
         size_col(header, width, :header_row)
       end
 
-    row = Enum.join(cols, " | ")
-    IO.puts(row)
+    Enum.join(cols, " | ")
   end
 
-  def print_separator(column_widths) do
+  @doc """
+  Generate the line between table header and body.any()
+
+  ## Example
+    iex> column_widths = [{"number", 3}, {"created_at", 10}, {"title", 15} ]
+    iex> Issues.TableFormatter.table_separator(column_widths)
+    "----+------------+----------------"
+  """
+  def table_separator(column_widths) do
     cols =
       for {_, width} <- column_widths do
         String.pad_trailing("-", width, "-")
       end
 
-    row = Enum.join(cols, "-+-")
-    IO.puts(row)
+    Enum.join(cols, "-+-")
   end
 
   def print_tickets(tickets, column_widths) do
