@@ -36,7 +36,16 @@ defmodule Stack do
   end
 
   def handle_cast({:push, new_value}, stack) do
+    if new_value < 10 do
+      System.halt(-3)
+    end
+
     {:noreply, Stack.Impl.push(stack, new_value)}
+  end
+
+  def terminate(_reason, _state) do
+    IO.puts("Generator terminated.")
+    # IO.inspect(reason)
   end
 end
 
