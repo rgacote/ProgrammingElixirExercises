@@ -30,12 +30,13 @@ defmodule Stack do
     {:reply, nil, []}
   end
 
-  def handle_call(:pop, _from, [head | tail]) do
-    {:reply, head, tail}
+  def handle_call(:pop, _from, stack) do
+    {value, new_stack} = Stack.Impl.pop(stack)
+    {:reply, value, new_stack}
   end
 
   def handle_cast({:push, new_value}, stack) do
-    {:noreply, [new_value | stack]}
+    {:noreply, Stack.Impl.push(stack, new_value)}
   end
 end
 
