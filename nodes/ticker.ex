@@ -30,7 +30,7 @@ defmodule Ticker do
 defmodule Client do
   def start do
     pid = spawn(__MODULE__, :receiver, [])
-    Ticket.register(pid)
+    Ticker.register(pid)
   end
 
   def receiver do
