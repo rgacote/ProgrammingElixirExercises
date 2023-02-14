@@ -44,9 +44,5 @@ defmodule Stack.Server do
   end
 end
 
-# { :ok, pid} = GenServer.start_link(Stack, [5, "cat", 9])
-# GenServer.call(pid, :pop)
-# GenServer.cast(pid, {:push, 42})
-# Stack.Server.start_link([5, "cat", 9])
 # Stack.Server.pop()
 # Stack.Server.push(42)
