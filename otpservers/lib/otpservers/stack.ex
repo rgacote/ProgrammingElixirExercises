@@ -1,4 +1,4 @@
-defmodule Stack do
+defmodule Stack.Server do
   @moduledoc """
   Implement a LIFO stack.
 
@@ -36,10 +36,6 @@ defmodule Stack do
   end
 
   def handle_cast({:push, new_value}, stack) do
-    if new_value < 10 do
-      System.halt(-3)
-    end
-
     {:noreply, Stack.Impl.push(stack, new_value)}
   end
 
@@ -52,6 +48,6 @@ end
 # { :ok, pid} = GenServer.start_link(Stack, [5, "cat", 9])
 # GenServer.call(pid, :pop)
 # GenServer.cast(pid, {:push, 42})
-# Stack.start_link([5, "cat", 9])
-# Stack.pop()
-# Stack.push(42)
+# Stack.Server.start_link([5, "cat", 9])
+# Stack.Server.pop()
+# Stack.Server.push(42)

@@ -8,6 +8,11 @@ defmodule(Stack.Impl) do
   end
 
   def push(stack, new_value) do
+    if new_value < 0 do
+      IO.puts("Cannot push negative values.")
+      System.halt(-3)
+    end
+
     [new_value | stack]
   end
 end
