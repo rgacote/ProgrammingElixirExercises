@@ -6,15 +6,18 @@ defmodule Stack.Application do
   use Application
 
   @impl true
+  @doc """
+  Move the stack initial value to Stash
+  """
   def start(_type, _args) do
     children = [
-      # Starts a worker by calling: Stack.Server.start_link(arg)
-      {Stack.Server, [1, 2, 3]}
+      {Stack.Stash, [1, 2, 3]},
+      {Stack.Server, nil}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Stack.Supervisor]
+    opts = [strategy: :rest_for_one, name: Stack.Supervisor]
     Supervisor.start_link(children, opts)
   end
 end

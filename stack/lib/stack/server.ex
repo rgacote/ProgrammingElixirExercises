@@ -22,8 +22,8 @@ defmodule Stack.Server do
   end
 
   # GenServer Implemenation
-  def init(stack) do
-    {:ok, stack}
+  def init(_) do
+    {:ok, Stack.Stash.get()}
   end
 
   def handle_call(:pop, _from, []) do
@@ -39,9 +39,8 @@ defmodule Stack.Server do
     {:noreply, Stack.Impl.push(stack, new_value)}
   end
 
-  def terminate(_reason, _state) do
-    IO.puts("Generator terminated.")
-    # IO.inspect(reason)
+  def terminate(_reason, stack) do
+    Stack.Stash.update(stack)
   end
 end
 
