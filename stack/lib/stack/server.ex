@@ -8,6 +8,8 @@ defmodule Stack.Server do
 
   use GenServer
 
+  @vsn "0"
+
   # External API
   def start_link(stack) do
     GenServer.start_link(__MODULE__, stack, name: __MODULE__)

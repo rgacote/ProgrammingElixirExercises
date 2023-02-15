@@ -1,6 +1,7 @@
 defmodule Stack.Stash do
   use GenServer
 
+  @vsb "0"
   @me __MODULE__
 
   # API
