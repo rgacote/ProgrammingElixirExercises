@@ -9,9 +9,9 @@ defmodule Stack.Application do
   @doc """
   Move the stack initial value to Stash
   """
-  def start(_type, _args) do
+  def start(_type, stack) do
     children = [
-      {Stack.Stash, [1, 2, 3]},
+      {Stack.Stash, stack},
       {Stack.Server, nil}
     ]
 

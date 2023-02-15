@@ -15,8 +15,7 @@ defmodule Otpservers.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {Stack.Application, []}
-
+      mod: {Stack.Application, [1, 2, 3]}
     ]
   end
 
