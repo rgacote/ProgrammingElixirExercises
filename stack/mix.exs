@@ -3,7 +3,7 @@ defmodule Otpservers.MixProject do
 
   def project do
     [
-      app: :otpservers,
+      app: :stack,
       version: "0.1.0",
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
@@ -16,8 +16,11 @@ defmodule Otpservers.MixProject do
     [
       mod: {
         Stack.Application,
-        [1, 2, 3]
+        []
       },
+      env: [
+        stack: [1, 2, 3]
+      ],
       registered: [
         Stack.Server
       ],

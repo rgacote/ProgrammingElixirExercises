@@ -9,9 +9,9 @@ defmodule Stack.Application do
   @doc """
   Move the stack initial value to Stash
   """
-  def start(_type, stack) do
+  def start(_type, _args) do
     children = [
-      {Stack.Stash, stack},
+      {Stack.Stash, Application.get_env(:stack, :stack)},
       {Stack.Server, nil}
     ]
 
